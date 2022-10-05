@@ -9,3 +9,10 @@
     width: 40px;
     top: 15px;
 }
+
+.loginBlock {
+    float: right;
+}
+.loginBlock a {
+    color: blueviolet;
+}

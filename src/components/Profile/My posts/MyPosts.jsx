@@ -1,9 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
 import classes from './MyPosts.module.css';
 import Post from "./Post/Post";
 
 
 const MyPosts = (props) => {
+
+    useEffect(()=>{
+        console.log("i'm alive");
+
+        return () => {
+            console.log("i'm dead");
+        }
+    },[props.posts])
 
     let postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likeCount={p.likeCount}/>)
 
