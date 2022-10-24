@@ -5,13 +5,10 @@ import Post from "./Post/Post";
 
 const MyPosts = (props) => {
 
-    useEffect(()=>{
-        console.log("i'm alive");
-
+    useEffect(() => {
         return () => {
-            console.log("i'm dead");
         }
-    },[props.posts])
+    }, [props.posts])
 
     let postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likeCount={p.likeCount}/>)
 
@@ -33,7 +30,8 @@ const MyPosts = (props) => {
                 <div>
                     <textarea onChange={onPostChange}
                               ref={newPostElement}
-                              value={props.newPostText}/>
+                              value={props.newPostText}
+                    />
                 </div>
                 <div>
                     <button onClick={onAddPost}>Add post</button>

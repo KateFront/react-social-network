@@ -9,10 +9,14 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
+import {useSelector} from "react-redux";
+
 
 
 const App = () => {
-
+const store = useSelector(s=>s);
+    console.log(store);
     return (
         <div className='app-wrapper'>
             <HeaderContainer/>
@@ -33,6 +37,8 @@ const App = () => {
                     <Route path="/music" element={<Music/>}/>
 
                     <Route path="/settings" element={<Settings/>}/>
+
+                    <Route path="/login" element={<Login/>}/>
                 </Routes>
             </div>
         </div>)
