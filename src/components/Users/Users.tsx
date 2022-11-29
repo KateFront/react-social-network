@@ -1,11 +1,28 @@
 import React from "react";
-import styles from "./users.module.css";
-import userPhoto from "../../assets/user.png";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
+import userPhoto from "../../assets/user.png";
+import {UserType} from "../../types/type";
+import styles from "./Users.module.css";
 
-let Users = (props) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+type PropsType = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (padeNumber: number) => void
+    users: Array<UserType>
+    followingWithProgress: Array<number>
+    unfollow: (userId: number) => void
+    follow: (userId: number) => void
+}
+
+let Users: React.FC<PropsType> = ({   currentPage,
+                                      users,
+                                      totalUsersCount,
+                                      onPageChanged,
+                                      pageSize,
+                                      ...props
+                                  }) => {
+    let pagesCount = Math.ceil(totalUsersCount / pageSize);
 
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -15,15 +32,15 @@ let Users = (props) => {
     return <div>
         <div>
             {pages.map(p => {
-                return <span key={p} className={props.currentPage === p ? styles.selectedPage : ''}
+                return <span key={p} className={currentPage === p ? styles.selectedPage : ''}
                              onClick={(e) => {
-                                 props.onPageChanged(p)
+                                 onPageChanged(p)
                              }}>
                         {p}
                     </span>
             })}
         </div>
-        {props.users.map(u => <div key={u.id}>
+        {users.map(u => <div key={u.id}>
             <span>
                 <div>
                     <NavLink to={'/profile/' + u.id}>
